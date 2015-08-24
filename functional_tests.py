@@ -1,4 +1,5 @@
 from selenium import webdriver
+from selenium.webdriver.common.keys import Keys
 import unittest
 
 browser = webdriver.Firefox()
@@ -25,15 +26,26 @@ class NewVisitorTest(unittest.TestCase):
 
 		# And are greeted by a welcome screen.
 		self.assertIn('Welcome to Biscuit!', self.browser.title)
-		self.fail('Finish the test!')
-
+		header_text = self.browser.find_element_by_tag_name('h1').header_text
+		self.assertIn('Biscuit', header_text)
 
 		# They are invited to enter the name of their business right away.
+		inputbox = self.browser.find_element_by_id('id_new_business')
+		self.assertEqual(
+			inputbox.get_attribute('placeholder',
+				'Enter the name of your business')
+		)
+		inputbox.send_keys('Wagging Tails')
+		inputbox.send_keys('Keys.ENTER')
 
 		# They navigate to a new page, where they see their business name in the header
-
+		header = self.browser.find_element_by_id('header')
+		self.assertTrue(
+			header.text == 'Wagging Tails')
+		
 		# They are then invited to enter their dog walkers' names.
-
+		self.fail('Finish the test!')
+		
 		# Veronica enters their dog walkers' names (Veronica, Juan, and Mateo).
 
 		# Veronica sees that the page updates with the dog walker names.
