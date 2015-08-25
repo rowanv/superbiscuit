@@ -16,7 +16,7 @@ class NewVisitorTest(unittest.TestCase):
 		self.browser.quit()
 
 	def test_can_start_a_business_and_view_its_information_later(self):
-		
+
 
 		# Our enterprising user, Veronica, owner of a dog-walking business has
 		# heard of a cool new app for helping them run their dog walking business.
@@ -30,19 +30,19 @@ class NewVisitorTest(unittest.TestCase):
 		self.assertIn('Biscuit', header_text)
 
 		# They are invited to enter the name of their business right away.
-		inputbox = self.browser.find_element_by_id('id_new_business')
-		self.assertEqual(
-			inputbox.get_attribute('placeholder'),
-				'Enter the name of your business'
-		)
-		inputbox.send_keys('Wagging Tails')
-		inputbox.send_keys(Keys.ENTER)
+		#inputbox = self.browser.find_element_by_id('id_new_business')
+		#self.assertEqual(
+		#	inputbox.get_attribute('placeholder'),
+		#		'Enter the name of your business'
+		#)
+		#inputbox.send_keys('Wagging Tails')
+		#inputbox.send_keys(Keys.ENTER)
 
 		# They navigate to a new page, where they see their business name in the header
-		header = self.browser.find_element_by_id('header')
+		header = self.browser.find_element_by_tag_name('h2').text
 		self.assertTrue(
 			header.text == 'Wagging Tails')
-		
+
 		# They are then invited to enter their dog walkers' names.
 		self.fail('Finish the test!')
 
@@ -63,7 +63,7 @@ class NewVisitorTest(unittest.TestCase):
 		# button next to Juan, they see that Floofy and Snoopy's appointments have
 		# been added to Juan's schedule.
 
-		# Satisfied, they go exit the home page and go to sleep. 
+		# Satisfied, they go exit the home page and go to sleep.
 
 if __name__ == '__main__':
 	unittest.main()
