@@ -1,5 +1,16 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<h2>Hello, Wagging Tails</h2>
+	<h2>Hello, Wagging Tails</h2>
+	<h3>Dog Walkers:</h3>
+	{% if dog_walkers %}
+	<ul>
+		{% for dog_walker in dog_walkers %}
+			<p>{{ dog_walker.name }}</p>
+		{% endfor %}
+	</ul>
+	{% else %}
+	<strong>No dog walkers registered.</strong>
+	{% endif %}
+	<h3>Add a Dog Walker:</h3>
 {% endblock %}

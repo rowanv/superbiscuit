@@ -26,7 +26,7 @@ class HomePageTest(TestCase):
 		self.assertIn('Wagging Tails', response.content.decode())
 
 
-		#self.assertIn('Happy Tails', response.content.decode())
+
 
 
 
