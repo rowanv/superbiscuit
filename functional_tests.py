@@ -17,7 +17,6 @@ class NewVisitorTest(unittest.TestCase):
 
 	def test_can_start_a_business_and_view_its_information_later(self):
 
-
 		# Our enterprising user, Veronica, owner of a dog-walking business has
 		# heard of a cool new app for helping them run their dog walking business.
 
@@ -39,9 +38,9 @@ class NewVisitorTest(unittest.TestCase):
 		#inputbox.send_keys(Keys.ENTER)
 
 		# They navigate to a new page, where they see their business name in the header
-		header = self.browser.find_element_by_tag_name('h2').text
+		welcome_message = self.browser.find_element_by_tag_name('h2').text
 		self.assertTrue(
-			header.text == 'Wagging Tails')
+			welcome_message == 'Wagging Tails')
 
 		# They are then invited to enter their dog walkers' names.
 		self.fail('Finish the test!')
