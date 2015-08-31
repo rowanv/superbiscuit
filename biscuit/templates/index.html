@@ -2,11 +2,14 @@
 
 {% block content %}
 
+
 <form method='POST' action ='/business/'>
+
+	<input name='business_text' id = 'id_new_business' placeholder='Enter a new business'>
 	{% csrf_token %}
-	{{ form }}
-	<input type='submit' value='OK'>
+	<!--{{ form }}-->
+	<!--input type='submit' value='OK'>-->
 
 </form>
-
+<table id='id_business_table'></table>
 {% endblock %}

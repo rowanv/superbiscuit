@@ -24,23 +24,20 @@ class NewVisitorTest(unittest.TestCase):
 		self.browser.get('http://localhost:8000')
 
 		# And are greeted by a welcome screen.
-		self.assertIn('Welcome to Biscuit!', self.browser.title)
+		self.assertIn('Welcome to Biscuit', self.browser.title)
 		header_text = self.browser.find_element_by_tag_name('h1').text
 		self.assertIn('Biscuit', header_text)
 
 		# They are invited to enter the name of their business right away.
-		#inputbox = self.browser.find_element_by_id('id_new_business')
-		#self.assertEqual(
-		#	inputbox.get_attribute('placeholder'),
-		#		'Enter the name of your business'
-		#)
-		#inputbox.send_keys('Wagging Tails')
-		#inputbox.send_keys(Keys.ENTER)
+		inputbox = self.browser.find_element_by_id('id_new_business')
+
+		inputbox.send_keys('Wagging Tails')
+		inputbox.send_keys(Keys.ENTER)
 
 		# They navigate to a new page, where they see their business name in the header
 		welcome_message = self.browser.find_element_by_tag_name('h2').text
-		self.assertTrue(
-			welcome_message == 'Wagging Tails')
+		print(welcome_message)
+		self.assertIn('Wagging Tails', welcome_message)
 
 		# They are then invited to enter their dog walkers' names.
 		self.fail('Finish the test!')

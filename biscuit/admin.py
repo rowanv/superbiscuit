@@ -1,3 +1,5 @@
 from django.contrib import admin
+from biscuit.models import Business, Walker
 
-# Register your models here.
+admin.site.register(Business)
+admin.site.register(Walker)
