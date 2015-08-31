@@ -17,13 +17,20 @@ class HomePageTest(TestCase):
 	#	self.assertEqual(response.content.decode(), expected_html)
 		pass
 
-	def test_home_page_can_save_a_post_request(self):
-		c = Client()
-		response = c.post('/', {'business_name': 'Wagging Tails'})
-		print(response.status_code)
-		response = c.get('/business/')
-		print(response.content.decode())
-		self.assertIn('Wagging Tails', response.content.decode())
+	def test_home_page_can_save_a_POST_request(self):
+		request = HttpRequest()
+		request.method = 'POST'
+		request.POST['business_text'] = 'Happy Tails'
+
+		response = index(request)
+
+		self.assertIn('Happy Tails', response.content.decode())
+
+		#c = Client()
+		#response = c.post('/', {'business_name': 'Wagging Tails'})
+		#response = c.get('/business/')
+		#print(response.content.decode())
+		#self.assertIn('Wagging Tails', response.content.decode())
 
 
 
