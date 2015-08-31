@@ -40,7 +40,7 @@ class NewVisitorTest(unittest.TestCase):
 		self.assertIn('Wagging Tails', welcome_message)
 
 		# They are then invited to enter their dog walkers' names.
-		self.fail('Finish the test!')
+		#self.fail('Finish the test!')
 
 		# Veronica enters their dog walkers' names (Veronica, Juan, and Mateo).
 
@@ -60,6 +60,15 @@ class NewVisitorTest(unittest.TestCase):
 		# been added to Juan's schedule.
 
 		# Satisfied, they go exit the home page and go to sleep.
+
+	def test_can_add_a_dog_walker_and_view_its_information_later(self):
+		self.browser.get('http://localhost:8000/business/')
+
+		dog_walkers_list = self.browser.find_element_by_id('id_dog_walkers_list').text
+		self.assertIn('Camille', dog_walkers_list)
+
+		#TODO: Test that can add a dog walker
+
 
 if __name__ == '__main__':
 	unittest.main()
