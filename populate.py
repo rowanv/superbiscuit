@@ -21,6 +21,41 @@ def populate():
         birthday=datetime.date(2010,4,12))
     miles.save()
 
+    appointment_1 = Appointment(
+        time=datetime.datetime(2015,9,12,8,30),
+        dog_walked=rover)
+    appointment_1.save()
+
+    appointment_2 = Appointment(
+        time=datetime.datetime(2015,9,13,8,30),
+        dog_walked=rover)
+    appointment_2.save()
+
+    appointment_3 = Appointment(
+        time=datetime.datetime(2015,9,14,8,30),
+        dog_walked=rover)
+    appointment_3.save()
+
+    appointment_4 = Appointment(
+        time=datetime.datetime(2015,9,15,8,30),
+        dog_walked=rover)
+    appointment_4.save()
+
+    appointment_5 = Appointment(
+        time=datetime.datetime(2015,9,16,8,30),
+        dog_walked=rover)
+    appointment_5.save()
+
+    appointment_6 = Appointment(
+        time=datetime.datetime(2015,10,1,11,00),
+        dog_walked=miles)
+    appointment_6.save()
+
+    appointment_7 = Appointment(
+        time=datetime.datetime(2015,10,3,11,00),
+        dog_walked=miles)
+    appointment_7.save()
+
     wiggly_walkers = add_business('Wiggly Walkers')
     add_walker(business='Wiggly Walkers', walker_name='Alfredo')
     add_walker(business='Wiggly Walkers', walker_name='Adelaide')
@@ -36,6 +71,10 @@ def populate():
     for b in Business.objects.all():
         for w in Walker.objects.filter(business=b):
             print ("- {0} - {1}".format(str(b), str(w)))
+    for d in Dog.objects.all():
+        print(d)
+    for a in Appointment.objects.all():
+        print(a)
 
 def add_business(business):
     b = Business.objects.get_or_create(business_name=business)
@@ -53,5 +92,5 @@ if __name__ == '__main__':
     print('Starting Biscuit population script...')
     os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'superbiscuit.settings')
     django.setup()
-    from biscuit.models import Business, Walker, Dog
+    from biscuit.models import Business, Walker, Dog, Appointment
     populate()

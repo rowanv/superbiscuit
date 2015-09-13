@@ -2,17 +2,50 @@
 
 {% block content %}
 	<h2>Hello, Wagging Tails</h2>
+
+
+
+
 	<h3>Dog Walkers:</h3>
 	<div id='id_dog_walkers_list'>
-		{% if dog_walkers %}
+		{% if all_walkers %}
 		<ul>
-			{% for dog_walker in dog_walkers %}
-				<p>{{ dog_walker }}</p>
+			{% for walker in all_walkers %}
+				<p>{{ walker.walker_name }}</p>
+			{% endfor %}
+		</ul>
+			{% else %}
+			<strong>No walkers registered.</strong>
+		{% endif %}
+	</div>
+	<h3>Appointments:</h3>
+	<div id='id_appointments_list'>
+		{% if appointments %}
+		<ul>
+			{% for app in appointments %}
+				<p> {{ app.time }} - {{ app.dog_walked }}</p>
 			{% endfor %}
 		</ul>
 		{% else %}
-		<strong>No dog walkers registered.</strong>
+
+		<strong>No appointments registered.</strong>
 		{% endif %}
 	</div>
+	<h3>Dogs:</h3>
+	<div id='id_dogs_list'>
+		{% if all_dogs %}
+		<ul>
+			{% for dog in all_dogs %}
+			<p>Name: {{ dog.name }}. Breed: {{ dog.breed }} . Owner: {{ dog.owner }}.</p>
+			{% endfor %}
+		</ul>
+		{% else %}
+			<strong>No dogs registered.</strong>
+		{% endif %}
+	</div>
+
 	<h3>Add a Dog Walker:</h3>
+	<h3>Add a Dog:</h3>
+	<h3>Add an Appointment:</h3>
+
 {% endblock %}

@@ -28,5 +28,5 @@ class Appointment(models.Model):
 	dog_walked = models.ForeignKey(Dog)
 
 	def __str__(self):
-		return self.time
+		return(str(self.time) + dog_walked)
 
