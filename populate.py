@@ -1,7 +1,26 @@
 import os
+import datetime
 import django
 
 def populate():
+    rover = Dog(name='Rover',
+        owner='Beatriz',
+        breed='Doberman Pinscher',
+        birthday=datetime.date(2014,1,3))
+    rover.save()
+
+    sue = Dog(name='Sue',
+        owner='Beatriz',
+        breed='Chihuahua',
+        birthday=datetime.date(2011,7,1))
+    sue.save()
+
+    miles = Dog(name='Miles',
+        owner='Maite',
+        breed='German Shepherd',
+        birthday=datetime.date(2010,4,12))
+    miles.save()
+
     wiggly_walkers = add_business('Wiggly Walkers')
     add_walker(business='Wiggly Walkers', walker_name='Alfredo')
     add_walker(business='Wiggly Walkers', walker_name='Adelaide')
@@ -26,10 +45,13 @@ def add_walker(business, walker_name):
     b_id = Business.objects.get(business_name=business).id
     w = Walker.objects.get_or_create(business_id=b_id, walker_name=walker_name)
     return w
+def add_dog(name, owner, breed, birthday):
+    name = Dog.objects.get_or_create(name=name)
+
 
 if __name__ == '__main__':
     print('Starting Biscuit population script...')
     os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'superbiscuit.settings')
     django.setup()
-    from biscuit.models import Business, Walker
+    from biscuit.models import Business, Walker, Dog
     populate()
