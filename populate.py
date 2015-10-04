@@ -2,6 +2,7 @@ import os
 import datetime
 import django
 
+
 def populate():
     rover = Dog(name='Rover',
         owner='Beatriz',
