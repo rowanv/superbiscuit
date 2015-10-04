@@ -6,6 +6,8 @@ from django.template.loader import render_to_string
 from biscuit.views import index, business_home
 from biscuit.models import Walker, Business
 
+from biscuit.forms import BusinessNameForm
+
 class HomePageTest(TestCase):
 
 	def test_root_url_resolves_to_home_page_view(self):
@@ -29,6 +31,19 @@ class HomePageTest(TestCase):
 		self.assertIn('Wagging Tails', response.content.decode())
 
 		#TODO: Make specific to the business that enter in the index
+
+	def test_blank_business_returns_an_error_message(self):
+		form = BusinessNameForm(data={'business_name': ''})
+		self.assertFalse(form.is_valid())
+		self.assertEqual(form.errors['business_name'][0], 'This field is required.')
+
+	def test_form_renders_business_text_input(self):
+		form = BusinessNameForm()
+		#self.assertIn("placeholder='Enter your business name'", form.as_p())
+		#self.assertIn('class="form-control input-lg"', form.as_p())
+
+
+
 
 
 	def test_home_page_redirects_after_POST(self):

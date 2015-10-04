@@ -1,13 +1,32 @@
 from django import forms
 from biscuit.models import Business, Walker
 
-class BusinessNameForm(forms.Modelform):
-	business_name = forms.CharField(label='Business Name', max_length=100, required=True)
+
+class BusinessNameForm(forms.models.ModelForm):
 
 	class Meta:
 		model = Business
+		fields = ('business_name',)
+		widgets = {
+		'text': forms.fields.TextInput(attrs={
+			'placeholder': 'Enter a business name',
+			'class': 'form-control input-lg',
+			}),
+		}
 
-class DogWalkerForm(forms.ModelForm):
-	walker = forms.CharField(label='Dog Walker Name', max_length=100, required=True)
+
+
+
+
+
+class DogWalkerForm(forms.models.ModelForm):
+
 	class Meta:
 		model = Walker
+		fields = ('walker_name','business',)
+		widgets = {
+			'text': forms.fields.TextInput(attrs={
+				'placeholder': 'Enter a dog walker name',
+				'class': 'form-control input-lg',
+				}),
+		}
