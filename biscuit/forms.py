@@ -8,7 +8,7 @@ class BusinessNameForm(forms.models.ModelForm):
 		model = Business
 		fields = ('business_name',)
 		widgets = {
-		'text': forms.fields.TextInput(attrs={
+		'business_name': forms.fields.TextInput(attrs={
 			'placeholder': 'Enter a business name',
 			'class': 'form-control input-lg',
 			}),
@@ -25,7 +25,7 @@ class DogWalkerForm(forms.models.ModelForm):
 		model = Walker
 		fields = ('walker_name','business',)
 		widgets = {
-			'text': forms.fields.TextInput(attrs={
+			'walker_name': forms.fields.TextInput(attrs={
 				'placeholder': 'Enter a dog walker name',
 				'class': 'form-control input-lg',
 				}),

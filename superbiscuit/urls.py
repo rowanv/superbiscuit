@@ -20,5 +20,7 @@ from biscuit import views
 urlpatterns = patterns('',
     url(r'^admin/', include(admin.site.urls)),
     url(r'^$', views.index, name='index'),
-    url(r'business/', views.business_home, name='business_home')
+    url(r'business/', views.business_home, name='business_home'),
+    #url(r'^new_busines/', views.new_business, name='new_business'),
+
 )

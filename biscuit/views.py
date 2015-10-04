@@ -1,19 +1,29 @@
+from django.core.exceptions import ValidationError
 from django.shortcuts import render, render_to_response
 from django.http import HttpResponse, HttpResponseRedirect
 
-from .biscuit_forms import *
-from biscuit.models import Walker, Appointment, Dog
+from .forms import BusinessNameForm
+from biscuit.models import Walker, Appointment, Dog, Business
+
 
 def index(request):
 
-	if request.method == 'POST':
-		form = BusinessNameForm(request.POST)
-		if form.is_valid():
-			return HttpResponseRedirect('/business/')
-	else:
-		form = BusinessNameForm()
+	return render(request, 'index.html', {'form': BusinessNameForm()})
 
-	return render(request, 'index.html', {'form': form})
+'''
+def index(request):
+	business_ = Business.objects.create()
+	try:
+		business_.full_clean()
+		business_.save()
+		return HttpResponseRedirect('/business')
+	except ValidationError:
+		business_.delete()
+		error = 'No empty business names'
+		return render(request, 'index.html', {'error': error})
+	return render(request, 'index.html',
+		{'form': BusinessNameForm()})
+'''
 
 def business_home(request):
 	appointments = Appointment.objects.all()

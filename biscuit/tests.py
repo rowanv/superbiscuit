@@ -39,8 +39,8 @@ class HomePageTest(TestCase):
 
 	def test_form_renders_business_text_input(self):
 		form = BusinessNameForm()
-		#self.assertIn("placeholder='Enter your business name'", form.as_p())
-		#self.assertIn('class="form-control input-lg"', form.as_p())
+		self.assertIn('placeholder="Enter a business name"', form.as_p())
+		self.assertIn('class="form-control input-lg"', form.as_p())
 
 
 
