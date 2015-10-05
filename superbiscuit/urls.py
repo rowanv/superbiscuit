@@ -21,6 +21,7 @@ urlpatterns = patterns('',
     url(r'^admin/', include(admin.site.urls)),
     url(r'^$', views.index, name='index'),
     url(r'business/', views.business_home, name='business_home'),
+    url(r'owner_list_add/', views.owner_list_add, name='owner_list_add'),
     #url(r'^new_busines/', views.new_business, name='new_business'),
 
 )

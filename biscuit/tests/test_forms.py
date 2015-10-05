@@ -1,7 +1,7 @@
 from django.test import TestCase
 
 from biscuit.models import Walker, Business
-from biscuit.forms import BusinessNameForm, DogWalkerNameForm
+from biscuit.forms import BusinessNameForm, DogWalkerNameForm, OwnerInfoForm
 
 
 class BusinessNameFormTest(TestCase):
@@ -42,4 +42,11 @@ class DogWalkerFormTest(TestCase):
 		new_walker = form.save()
 		self.assertEqual(new_walker, Walker.objects.first())
 		self.assertEqual(new_walker.walker_name, 'Maite')
+
+class OwnerInfoFormTest(TestCase):
+	def test_form_renders_item_text_input(self):
+		form = OwnerInfoForm()
+		self.assertIn(
+			'placeholder="First Name"', form.as_p())
+		self.assertIn('class="form-control input-lg"', form.as_p())
 

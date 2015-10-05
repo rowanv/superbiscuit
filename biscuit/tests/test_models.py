@@ -1,7 +1,7 @@
 from django.core.exceptions import ValidationError
 from django.test import TestCase
 
-from biscuit.models import Business, Walker, Appointment
+from biscuit.models import Business, Walker, Appointment, Owner
 from unittest import skip
 
 
@@ -45,5 +45,16 @@ class AppointmentModelTest(TestCase):
 	#TODO: Edit this so get validation error instead of an integrity
 	#error -- currently there is duplicate item validation
 
+class OwnerModelTest(TestCase):
+
+	def test_defaul_text(self):
+		owner = Owner()
+		self.assertEqual(owner.owner_first_name, '')
+
+	def test_cannot_save_empty_owner_names(self):
+		owner = Owner(owner_first_name='', owner_last_name='Viscaya')
+		with self.assertRaises(ValidationError):
+			owner.save()
+			owner.full_clean()
 
 
