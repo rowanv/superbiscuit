@@ -6,7 +6,7 @@ from django.template.loader import render_to_string
 from biscuit.views import index, business_home
 from biscuit.models import Walker, Business
 
-from biscuit.forms import BusinessNameForm
+from biscuit.forms import BusinessNameForm, DogWalkerNameForm
 
 class HomePageTest(TestCase):
 
@@ -70,7 +70,21 @@ class ItemModelTest(TestCase):
 		pass
 
 
+class DogWalkerFormTest(TestCase):
+	def test_form_renders_item_text_input(self):
+		form = DogWalkerNameForm()
+		self.assertIn(
+			'placeholder="Enter the name of the dog walker you wish to add"', form.as_p())
+		self.assertIn('class="form-control input-lg"', form.as_p())
 
+	def test_form_validation_for_blank_items(self):
+		form = DogWalkerNameForm(data={'walker_name': ''})
+		self.assertFalse(form.is_valid())
+		self.assertEqual(
+			form.errors['walker_name'][0], 'This field is required.')
 
-
+	def test_form_save_handles_saving_to_a_db(self):
+		business = Business.objects.create()
+		form = DogWalkerNameForm(data={'walker_name': 'Maite'})
+		new_walker = form.save(for_business=business)
 
