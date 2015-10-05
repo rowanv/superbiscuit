@@ -2,7 +2,7 @@ from django.core.exceptions import ValidationError
 from django.shortcuts import render, render_to_response
 from django.http import HttpResponse, HttpResponseRedirect
 
-from .forms import BusinessNameForm
+from .forms import BusinessNameForm, DogWalkerNameForm
 from biscuit.models import Walker, Appointment, Dog, Business
 
 
@@ -31,5 +31,12 @@ def business_home(request):
 	all_dogs = Dog.objects.all()
 	context_dict = {'all_walkers': all_walkers,
 					'appointments': appointments,
-					'all_dogs': all_dogs}
-	return render_to_response('business_home.html', context_dict)
+					'all_dogs': all_dogs,
+					'dog_walker_form': DogWalkerNameForm()}
+	if request.method == 'POST':
+		form = DogWalkerNameForm(data=request.POST)
+		if form.is_valid():
+			form.save()
+			return render(request, 'business_home.html', context_dict)
+	return render(request, 'business_home.html', context_dict)
+	#need render instead of render_to_response for csrf token

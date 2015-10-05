@@ -86,5 +86,7 @@ class DogWalkerFormTest(TestCase):
 	def test_form_save_handles_saving_to_a_db(self):
 		business = Business.objects.create()
 		form = DogWalkerNameForm(data={'walker_name': 'Maite'})
-		new_walker = form.save(for_business=business)
+		new_walker = form.save()
+		self.assertEqual(new_walker, Walker.objects.first())
+		self.assertEqual(new_walker.walker_name, 'Maite')
 
