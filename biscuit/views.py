@@ -43,6 +43,8 @@ def business_home(request):
 	if request.method == 'POST':
 		form = DogWalkerNameForm(data=request.POST)
 		if form.is_valid():
+			b = Business.objects.get(business_name='Wiggly Walkers')
+			form.business = b
 			form.save()
 			return render(request, 'business_home.html', context_dict)
 	return render(request, 'business_home.html', context_dict)

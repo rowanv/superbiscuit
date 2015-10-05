@@ -11,9 +11,9 @@ class Migration(migrations.Migration):
     ]
 
     operations = [
-        migrations.RenameField(
+        migrations.AlterField(
             model_name='walker',
-            old_name='business_name',
-            new_name='business',
+            name='business',
+            field=models.ManyToManyField(to='biscuit.Business'),
         ),
     ]

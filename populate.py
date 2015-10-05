@@ -82,9 +82,16 @@ def add_business(business):
     return b
 
 def add_walker(business, walker_name):
-    b_id = Business.objects.get(business_name=business).id
-    w = Walker.objects.get_or_create(business_id=b_id, walker_name=walker_name)
+
+
+
+    b, created = Business.objects.get_or_create(business_name=business)
+    if created:
+        b.save()
+    w = Walker(walker_name=walker_name, business=b)
+    w.save()
     return w
+
 def add_dog(name, owner, breed, birthday):
     name = Dog.objects.get_or_create(name=name)
 
