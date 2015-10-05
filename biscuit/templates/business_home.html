@@ -3,7 +3,13 @@
 {% block content %}
 	<h2>Hello, Wagging Tails</h2>
 
-
+	{% if all_businesses %}
+		 {% for business in all_businesses %}
+		 	{{ business.business_name }}
+		 {% endfor %}
+		 {% else %}
+		 	No businesses registered.
+	{% endif %}
 
 
 	<h3>Dog Walkers:</h3>

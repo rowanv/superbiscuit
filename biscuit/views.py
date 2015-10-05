@@ -7,6 +7,11 @@ from biscuit.models import Walker, Appointment, Dog, Business
 
 
 def index(request):
+	if request.method == 'POST':
+		form = BusinessNameForm(data=request.POST)
+		if form.is_valid():
+			form.save()
+			return HttpResponseRedirect('/business')
 
 	return render(request, 'index.html', {'form': BusinessNameForm()})
 
@@ -29,7 +34,9 @@ def business_home(request):
 	appointments = Appointment.objects.all()
 	all_walkers = Walker.objects.all()
 	all_dogs = Dog.objects.all()
-	context_dict = {'all_walkers': all_walkers,
+	all_businesses = Business.objects.all()
+	context_dict = {'all_businesses': all_businesses,
+					'all_walkers': all_walkers,
 					'appointments': appointments,
 					'all_dogs': all_dogs,
 					'dog_walker_form': DogWalkerNameForm()}
