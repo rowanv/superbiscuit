@@ -31,6 +31,7 @@ def index(request):
 '''
 
 def business_home(request):
+	b = Business.objects.get(business_name='Wiggly Walkers')
 	appointments = Appointment.objects.all()
 	all_walkers = Walker.objects.all()
 	all_dogs = Dog.objects.all()
@@ -39,13 +40,15 @@ def business_home(request):
 					'all_walkers': all_walkers,
 					'appointments': appointments,
 					'all_dogs': all_dogs,
-					'dog_walker_form': DogWalkerNameForm()}
+					'dog_walker_form': DogWalkerNameForm(initial={'business': b})}
 	if request.method == 'POST':
 		form = DogWalkerNameForm(data=request.POST)
 		if form.is_valid():
-			b = Business.objects.get(business_name='Wiggly Walkers')
-			form.business = b
-			form.save()
-			return render(request, 'business_home.html', context_dict)
+			w = form.save()
+			w.save()
+
+
+
+		return render(request, 'business_home.html', context_dict)
 	return render(request, 'business_home.html', context_dict)
 	#need render instead of render_to_response for csrf token

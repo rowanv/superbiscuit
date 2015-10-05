@@ -7,8 +7,8 @@ class Business(models.Model):
 		return self.business_name
 
 class Walker(models.Model):
-	business = models.ForeignKey(Business)
 	walker_name = models.CharField(max_length=100)
+	business = models.ForeignKey(Business, null=True, blank=True)
 
 	def __str__(self):
 		return str(self.walker_name) + ' - ' + str(self.business)

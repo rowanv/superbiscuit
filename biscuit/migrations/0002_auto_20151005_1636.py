@@ -14,6 +14,6 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='walker',
             name='business',
-            field=models.ManyToManyField(to='biscuit.Business'),
+            field=models.ForeignKey(blank=True, null=True, to='biscuit.Business'),
         ),
     ]

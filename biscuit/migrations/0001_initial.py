@@ -13,21 +13,21 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Appointment',
             fields=[
-                ('id', models.AutoField(auto_created=True, verbose_name='ID', serialize=False, primary_key=True)),
+                ('id', models.AutoField(primary_key=True, serialize=False, auto_created=True, verbose_name='ID')),
                 ('time', models.DateTimeField()),
             ],
         ),
         migrations.CreateModel(
             name='Business',
             fields=[
-                ('id', models.AutoField(auto_created=True, verbose_name='ID', serialize=False, primary_key=True)),
+                ('id', models.AutoField(primary_key=True, serialize=False, auto_created=True, verbose_name='ID')),
                 ('business_name', models.CharField(max_length=100)),
             ],
         ),
         migrations.CreateModel(
             name='Dog',
             fields=[
-                ('id', models.AutoField(auto_created=True, verbose_name='ID', serialize=False, primary_key=True)),
+                ('id', models.AutoField(primary_key=True, serialize=False, auto_created=True, verbose_name='ID')),
                 ('name', models.CharField(max_length=100)),
                 ('owner', models.CharField(max_length=100)),
                 ('breed', models.CharField(default='Friendly Mutt', max_length=100)),
@@ -37,9 +37,9 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Walker',
             fields=[
-                ('id', models.AutoField(auto_created=True, verbose_name='ID', serialize=False, primary_key=True)),
+                ('id', models.AutoField(primary_key=True, serialize=False, auto_created=True, verbose_name='ID')),
                 ('walker_name', models.CharField(max_length=100)),
-                ('business', models.ManyToManyField(blank=True, to='biscuit.Business')),
+                ('business', models.ForeignKey(to='biscuit.Business', blank=True)),
             ],
         ),
         migrations.AddField(
