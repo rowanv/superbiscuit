@@ -4,10 +4,11 @@
 
 
 
-<form method='POST' action ='/owner_list_add'>
+<form method='POST' action ='/owner_list_add/'>
 
 
 	{{ form.as_p }}
+	<input type='submit' value='OK'>
 	{% csrf_token %}
 	{% if form.errors %}
 	<div class='form-group has-error'>
@@ -16,5 +17,18 @@
 	{% endif %}
 
 </form>
+
+<h3>Owners:</h3>
+<div id='id_owners_list'>
+	{% if all_owners %}
+	<ul>
+		{% for owner in all_owners %}
+		<p> {{ owner.last_name }}, {{ owner.first_name }} </p>
+		{% endfor %}
+	</ul>
+	{% else %}
+		<strong>No owners registered.</strong>
+	{% endif %}
+</div>
 
 {% endblock %}
