@@ -22,7 +22,7 @@ class NewVisitorTest(unittest.TestCase):
 
 		# They checkout the app's homepage
 		self.browser.get('http://localhost:8000')
-
+		'''
 		# And are greeted by a welcome screen.
 		self.assertIn('Welcome to Biscuit', self.browser.title)
 		header_text = self.browser.find_element_by_tag_name('h1').text
@@ -35,19 +35,40 @@ class NewVisitorTest(unittest.TestCase):
 		inputbox.send_keys(Keys.ENTER)
 
 		# They navigate to a new page, where they see their business name in the header
+		self.browser.implicitly_wait(3)
+		'''
+
+	def test_can_view_business_information(self):
+		self.browser.get('http://localhost:8000/business/')
+
 		welcome_message = self.browser.find_element_by_tag_name('h2').text
-		print(welcome_message)
-		self.assertIn('Wagging Tails', welcome_message)
+		self.assertIn('Wiggly Walkers', welcome_message)
 
 		# They are then invited to enter their dog walkers' names.
 		#self.fail('Finish the test!')
+		walker_input_box = self.browser.find_element_by_id('id_walker_name')
+		walker_input_box.send_keys('Sue')
+		walker_input_box.send_keys(Keys.ENTER)
 
-		# Veronica enters their dog walkers' names (Veronica, Juan, and Mateo).
-
-		# Veronica sees that the page updates with the dog walker names.
+		# They then see their dog walker added to the dog walker table
+		walkers_table = self.browser.find_element_by_id('id_dog_walkers_list')
+		walker_rows = walkers_table.find_elements_by_tag_name('p')
+		self.assertIn('Sue - Wiggly Walkers',
+			[walker_row.text for walker_row in walker_rows])
 
 		# Veronica then enters the name of one of their clients: Victoria,
 		# along with the client's two dogs: Floofy and Snoopy.
+		client_input_box = self.browser.find_element_by_id('id_client_name')
+		dog_input_box = self.browser.find_element_by_id('id_dog_name')
+
+		client_input_box.send_keys('Victoria')
+		client_input_box.send_keys('Floofy')
+
+		client_table = self.browser.find_element_by_id('id_client_list')
+		client_rows = client_table.find_element_by_id('p')
+
+		self.assertIn('Victoria - Floofy',
+			[client_row.text for client_row in client_rows])
 
 		# Veronica sees that the client section updates with the client's names
 
