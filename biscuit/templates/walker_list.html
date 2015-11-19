@@ -3,4 +3,23 @@
 {% block content %}
 
 
+
+
+
+    <h3>Dog Walkers:</h3>
+
+
+
+    <div id='id_dog_walkers_list'>
+        {% if all_walkers %}
+        <ul>
+            {% for walker in all_walkers %}
+                <p>{{ walker.walker_name }} - {{ walker.business }}</p>
+            {% endfor %}
+        </ul>
+            {% else %}
+            <strong>No walkers registered.</strong>
+        {% endif %}
+    </div>
+
 {% endblock %}

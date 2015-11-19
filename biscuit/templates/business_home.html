@@ -3,52 +3,23 @@
 {% block content %}
 	<h2>Hello, Wiggly Walkers</h2>
 
-	{% if all_businesses %}
-		 {% for business in all_businesses %}
-		 	{{ business.business_name }}
-		 {% endfor %}
-		 {% else %}
-		 	No businesses registered.
-	{% endif %}
+	<div class='container'>
+		<div class='jumbotron text-center'>
+			<h1>Hello!</h1>
+			<h3>Welcome to your business' home page.</h3>
+			<a class="btn btn-lg btn-success" href="/appointment_calendar/" role="button" id='id_appointments_btn'>Appointments</a>
+			<a class="btn btn-lg btn-success" href="/client_metrics/" role="button" id='id_clients_btn'>Clients</a>
+			<a class="btn btn-lg btn-success" href="/walker_metrics/" role="button" id='id_walkers_btn'>Walkers</a>
+		</div>
 
 
-	<h3>Dog Walkers:</h3>
-	<div id='id_dog_walkers_list'>
-		{% if all_walkers %}
-		<ul>
-			{% for walker in all_walkers %}
-				<p>{{ walker.walker_name }} - {{ walker.business }}</p>
-			{% endfor %}
-		</ul>
-			{% else %}
-			<strong>No walkers registered.</strong>
-		{% endif %}
 	</div>
-	<h3>Appointments:</h3>
-	<div id='id_appointments_list'>
-		{% if appointments %}
-		<ul>
-			{% for app in appointments %}
-				<p> {{ app.time }} - {{ app.dog_walked }}</p>
-			{% endfor %}
-		</ul>
-		{% else %}
 
-		<strong>No appointments registered.</strong>
-		{% endif %}
-	</div>
-	<h3>Dogs:</h3>
-	<div id='id_dogs_list'>
-		{% if all_dogs %}
-		<ul>
-			{% for dog in all_dogs %}
-			<p>Name: {{ dog.name }}. Breed: {{ dog.breed }} . Owner: {{ dog.owner }}.</p>
-			{% endfor %}
-		</ul>
-		{% else %}
-			<strong>No dogs registered.</strong>
-		{% endif %}
-	</div>
+
+
+
+
+
 
 	<h3>Add a Dog Walker:</h3>
 	<form method='POST' action='/business/'>
@@ -61,8 +32,7 @@
 	</div>
 	</form>
 	{% endif %}
-	<h3>Add a Dog:</h3>
-	<h3>Add an Appointment:</h3>
+
 
 
 

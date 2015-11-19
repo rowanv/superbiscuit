@@ -3,4 +3,22 @@
 {% block content %}
 
 
+
+            <div class="row">
+
+
+            {% for panel in panels_html %}
+
+                {{ panel | safe }}
+
+            {% endfor %}
+
+
+
+            </div>
+            <!-- /.row -->
+
+            {{ me }}
+
+
 {% endblock %}

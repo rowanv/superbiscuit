@@ -2,5 +2,18 @@
 
 {% block content %}
 
+    <h3>Appointments:</h3>
+    <div id='id_appointments_list'>
+        {% if appointments %}
+        <ul>
+            {% for app in appointments %}
+                <p> {{ app.time }} - {{ app.dog_walked }}</p>
+            {% endfor %}
+        </ul>
+        {% else %}
+
+        <strong>No appointments registered.</strong>
+        {% endif %}
+    </div>
 
 {% endblock %}

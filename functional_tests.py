@@ -82,14 +82,23 @@ class NewVisitorTest(unittest.TestCase):
 
 		# Satisfied, they go exit the home page and go to sleep.
 
+
+
+class WalkerVisitorTest(unittest.TestCase):
+
+	def setUp(self):
+		self.browser = webdriver.Firefox()
+		self.browser.implicitly_wait(3)
+
+	def tearDown(self):
+		self.browser.quit()
+
 	def test_can_add_a_dog_walker_and_view_its_information_later(self):
 		self.browser.get('http://localhost:8000/business/')
 
-		dog_walkers_list = self.browser.find_element_by_id('id_dog_walkers_list').text
-		self.assertIn('Camille', dog_walkers_list)
+		self.browser.find_element_by_id('id_walkers_button').click
 
 		#TODO: Test that can add a dog walker
-
 
 if __name__ == '__main__':
 	unittest.main()

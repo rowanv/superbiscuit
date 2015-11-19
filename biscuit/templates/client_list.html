@@ -3,4 +3,17 @@
 {% block content %}
 
 
+    <h3>Dogs:</h3>
+    <div id='id_dogs_list'>
+        {% if all_dogs %}
+        <ul>
+            {% for dog in all_dogs %}
+            <p>Name: {{ dog.name }}. Breed: {{ dog.breed }} . Owner: {{ dog.owner }}.</p>
+            {% endfor %}
+        </ul>
+        {% else %}
+            <strong>No dogs registered.</strong>
+        {% endif %}
+    </div>
+
 {% endblock %}
