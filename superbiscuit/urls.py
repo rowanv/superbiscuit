@@ -22,6 +22,17 @@ urlpatterns = patterns('',
     url(r'^$', views.index, name='index'),
     url(r'business/', views.business_home, name='business_home'),
     url(r'owner_list_add/', views.owner_list_add, name='owner_list_add'),
+    url(r'client_metrics/', views.client_metrics, name='client_metrics'),
+    url(r'client_list/', views.client_list, name='client_list'),
+    url(r'client_indiv/', views.client_indiv, name='client_indiv'),
+    url(r'walker_metrics/', views.walker_metrics, name='walker_metrics'),
+    url(r'walker_list/', views.walker_list, name='walker_list'),
+    url(r'walker_indiv/', views.walker_indiv, name='walker_indiv'),
+    url(r'appointment_calendar/', views.appointment_calendar,
+        name='appointment_calendar'),
+    url(r'appointment_list/', views.appointment_list,
+        name='appointment_list'),
+
     #url(r'^new_busines/', views.new_business, name='new_business'),
 
 )

@@ -1,6 +1,6 @@
 from django.test import TestCase
 
-from biscuit.models import Walker, Business
+from biscuit.models import Walker, Business, Owner
 from biscuit.forms import BusinessNameForm, DogWalkerNameForm, OwnerInfoForm
 
 
@@ -50,3 +50,26 @@ class OwnerInfoFormTest(TestCase):
 			'placeholder="First Name"', form.as_p())
 		self.assertIn('class="form-control input-lg"', form.as_p())
 
+	def test_form_validation_for_blank_items(self):
+		form = OwnerInfoForm(data={'owner_first_name': ''})
+		self.assertFalse(form.is_valid())
+		self.assertEqual(
+			form.errors['owner_first_name'][0], 'This field is required.')
+	'''
+	def test_form_save_handles_saving_to_a_db(self):
+		business = Business.objects.create(business_name='Wiggly Walkers')
+
+		owner = Owner.objects.create()
+		form = OwnerInfoForm(data={'owner_first_name': 'Samuel',
+									'owner_last_name': 'Ku',
+									'owner_email':'test@something.com',
+									'owner_address_1': '362 Shady St.',
+									'owner_address_2': '1',
+									'owner_address_city': 'Montgomery',
+									'owner_address_state': 'AL',
+									'owner_address_country': 'USA',
+									})
+		new_owner = form.save()
+		self.assertEqual(new_owner, Owner.objects.first())
+		self.assertEqual(new_owner.owner_first_name, 'Samuel')
+		'''

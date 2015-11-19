@@ -1,5 +1,6 @@
 from django.core.exceptions import ValidationError
 from django.test import TestCase
+from django.template.loader import render_to_string
 
 from biscuit.models import Business, Walker, Appointment, Owner
 from unittest import skip

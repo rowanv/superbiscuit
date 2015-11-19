@@ -60,3 +60,27 @@ def owner_list_add(request):
 		form = OwnerInfoForm(data=request.POST)
 	return render(request, 'owner_list_add.html', context_dict)
 
+def client_metrics(request):
+	return render(request, 'client_metrics.html')
+
+def client_list(request):
+	return render(request, 'client_list.html')
+
+def client_indiv(request):
+	return render(request, 'client_indiv.html')
+
+def walker_metrics(request):
+	return render(request, 'walker_metrics.html')
+
+def walker_list(request):
+	return render(request, 'walker_list.html')
+
+def walker_indiv(request):
+	return render(request, 'walker_indiv.html')
+
+def appointment_calendar(request):
+	return render(request, 'appointment_calendar.html')
+
+def appointment_list(request):
+	return render(request, 'appointment_list.html')
+
