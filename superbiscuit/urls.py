@@ -15,12 +15,14 @@ Including another URLconf
 """
 from django.conf.urls import include, url, patterns
 from django.contrib import admin
+from django.contrib.staticfiles.urls import staticfiles_urlpatterns
+from django.conf import settings
 from biscuit import views
 
 urlpatterns = patterns('',
     url(r'^admin/', include(admin.site.urls)),
     url(r'^$', views.index, name='index'),
-    url(r'business/', views.business_home, name='business_home'),
+    url(r'^business/$', views.business_home, name='business_home'),
     url(r'owner_list_add/', views.owner_list_add, name='owner_list_add'),
     url(r'client_metrics/', views.client_metrics, name='client_metrics'),
     url(r'client_list/', views.client_list, name='client_list'),
@@ -36,3 +38,6 @@ urlpatterns = patterns('',
     #url(r'^new_busines/', views.new_business, name='new_business'),
 
 )
+
+if settings.DEBUG:
+    urlpatterns += staticfiles_urlpatterns()

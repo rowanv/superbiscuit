@@ -107,6 +107,29 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-STATICFILES_DIRS = [os.path.join(BASE_DIR, '/static'),]
+STATICFILES_DIRS = (os.path.join(BASE_DIR, 'static'),)
 
+STATICFILES_FINDERS = (
+    'djangobower.finders.BowerFinder',)
+
+BOWER_COMPONENTS_ROOT = os.path.join(BASE_DIR, 'bower_components')
+
+BOWER_INSTALLED_APPS = (
+    'bootstrap',
+    'bootstrap-social',
+    'datatables',
+    'datatables-plugins',
+    'datatables-responsive',
+    'flot',
+    'flot.tooltip',
+    'font-awesome',
+    'holderjs',
+    'jquery',
+    'metisMenu',
+    'mocha',
+    'morrisjs',
+    'raphael',
+    'timeline',
+    )
+#note: then manually added sb-admin-2. TODO: host in bower
 
