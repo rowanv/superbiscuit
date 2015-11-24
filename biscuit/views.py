@@ -1,6 +1,6 @@
 from django.core.exceptions import ValidationError
 from django.shortcuts import render, render_to_response
-from django.http import HttpResponse, HttpResponseRedirect
+from django.http import HttpResponse, HttpResponseRedirect, Http404
 
 from .forms import BusinessNameForm, DogWalkerNameForm, OwnerInfoForm
 from biscuit.models import Walker, Appointment, Dog, Business, Owner, IndicatorPanel
@@ -33,11 +33,9 @@ def index(request):
 def business_home(request):
     b = Business.objects.get(business_name='Wiggly Walkers')
     appointments = Appointment.objects.all()
-    all_walkers = Walker.objects.all()
     all_dogs = Dog.objects.all()
     all_businesses = Business.objects.all()
     context_dict = {'all_businesses': all_businesses,
-                    'all_walkers': all_walkers,
                     'appointments': appointments,
                     'all_dogs': all_dogs,
                     'dog_walker_form': DogWalkerNameForm(initial={'business': b}),
@@ -103,10 +101,17 @@ def walker_metrics(request):
     return render(request, 'walker_metrics.html', context_dict)
 
 def walker_list(request):
-    return render(request, 'walker_list.html')
+    all_walkers = Walker.objects.all()
+    context_dict = {'all_walkers': all_walkers}
+    return render(request, 'walker_list.html', context_dict)
 
-def walker_indiv(request):
-    return render(request, 'walker_indiv.html')
+def walker_indiv(request, walker_id):
+    context_dict = {
+        'walker_data': Walker.objects.get(id=walker_id)
+    }
+    if not walker_id:
+        raise Http404('You must provide a Walker ID')
+    return render(request, 'walker_indiv.html', context_dict)
 
 def appointment_calendar(request):
     return render(request, 'appointment_calendar.html')

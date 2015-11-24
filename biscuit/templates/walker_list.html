@@ -14,7 +14,9 @@
         {% if all_walkers %}
         <ul>
             {% for walker in all_walkers %}
-                <p>{{ walker.walker_name }} - {{ walker.business }}</p>
+                <p>{{ walker.walker_name }} - {{ walker.business }}
+                    <a href='/business/walker_indiv/{{ walker.id }}'>More Info</a></p>
+
             {% endfor %}
         </ul>
             {% else %}
