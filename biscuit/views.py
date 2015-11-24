@@ -70,20 +70,34 @@ def client_indiv(request):
     return render(request, 'client_indiv.html')
 
 def walker_metrics(request):
+    walker_list_link = '/business/walker_list/'
     blue_panel = IndicatorPanel(None)
-    blue_panel.set_values('blue', 'tasks', 'Total No. of Walkers')
+    blue_panel.set_values('blue', 'tasks', 'Total No. of Walkers', walker_list_link)
     total_walkers = len([x for x in Walker.objects.all()])
     blue_panel.panel_num = str(total_walkers)
     #To do: add if statement to limit to this business' walkers
+    green_panel = IndicatorPanel(None)
+    green_panel.set_values('green', 'comments', 'Most Walks', walker_list_link)
+    green_panel.panel_num = 'Sue'
+    #TO DO: have this actually pull walker with most walks
+
+    yellow_panel = IndicatorPanel(None)
+    yellow_panel.set_values('yellow', 'tasks', 'Walkers Added This Mo.',
+        walker_list_link)
+    yellow_panel.panel_num = '1'
+
+    red_panel = IndicatorPanel(None)
+    red_panel.set_values('red', 'support', 'Lost This Month', walker_list_link)
+    red_panel.panel_num = '0'
+
     context_dict = {
     'panels_html': [
-            #yellow_panel.get_html_rep(),
-            #green_panel.get_html_rep(),
-            #red_panel.get_html_rep(),
+            green_panel.get_html_rep(),
             blue_panel.get_html_rep(),
+            yellow_panel.get_html_rep(),
+            red_panel.get_html_rep(),
 
         ],
-    'me': 'hi',
     }
     print(blue_panel.get_html_rep())
     return render(request, 'walker_metrics.html', context_dict)

@@ -110,10 +110,15 @@ class IndicatorPanel(Vignette):
             'support': 'fa-support'
         }
 
-    def set_values(self, panel_colour, panel_icon, panel_text):
+    def set_values(self, panel_colour, panel_icon, panel_text, *args):
         self.panel_class = self.panel_colour_to_class_mapping[panel_colour]
         self.icon_class = self.panel_icon_to_class_mapping[panel_icon]
         self.panel_text = panel_text
+        if args:
+            self.panel_details_link = args[0]
+        else:
+            self.panel_details_link = None
+
 
     def get_html_rep(self):
         panel_html = '''
@@ -130,7 +135,7 @@ class IndicatorPanel(Vignette):
                                 </div>
                             </div>
                         </div>
-                        <a href="#">
+                        <a href="{}">
                             <div class="panel-footer">
                                 <span class="pull-left">View Details</span>
                                 <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
@@ -140,7 +145,7 @@ class IndicatorPanel(Vignette):
                     </div>
                 </div>
         '''.format(self.panel_class, self.icon_class,
-                   self.panel_num, self.panel_text)
+                   self.panel_num, self.panel_text, self.panel_details_link)
         return panel_html
 
 
