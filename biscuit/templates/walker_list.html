@@ -6,7 +6,7 @@
 
 
 
-    <h3>Dog Walkers:</h3>
+    <h3>Your Dog Walkers:</h3>
 
 
 
@@ -15,7 +15,7 @@
         <ul>
             {% for walker in all_walkers %}
                 <p>{{ walker.walker_name }} - {{ walker.business }}
-                    <a href='/business/walker_indiv/{{ walker.id }}'>More Info</a></p>
+                    <a class='more_info_link' href='/business/walker_indiv/{{ walker.id }}'>More Info</a></p>
 
             {% endfor %}
         </ul>
@@ -23,5 +23,18 @@
             <strong>No walkers registered.</strong>
         {% endif %}
     </div>
+
+    <h3>Add a Dog Walker:</h3>
+    <form method='POST' action='/business/walker_list/'>
+        {% csrf_token %}
+        {{ dog_walker_form.as_p }}
+
+        {% if dog_walker_form.errors %}
+        <div class='form-group has-error'>
+            <span class'help-block'>{{ dog_walker_form.text.errors }}</span>
+        </div>
+    </form>
+    {% endif %}
+
 
 {% endblock %}

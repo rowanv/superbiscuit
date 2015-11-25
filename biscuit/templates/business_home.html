@@ -21,17 +21,6 @@
 
 
 
-	<h3>Add a Dog Walker:</h3>
-	<form method='POST' action='/business/'>
-	{% csrf_token %}
-	{{ dog_walker_form.as_p }}
-
-	{% if dog_walker_form.errors %}
-	<div class='form-group has-error'>
-		<span class'help-block'>{{ dog_walker_form.text.errors }}</span>
-	</div>
-	</form>
-	{% endif %}
 
 
 

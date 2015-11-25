@@ -102,7 +102,17 @@ def walker_metrics(request):
 
 def walker_list(request):
     all_walkers = Walker.objects.all()
-    context_dict = {'all_walkers': all_walkers}
+    b = Business.objects.get(business_name='Wiggly Walkers')
+    context_dict = {'all_walkers': all_walkers,
+                    'dog_walker_form': DogWalkerNameForm(initial={'business': b}),
+                    }
+
+    if request.method == 'POST':
+        form = DogWalkerNameForm(data=request.POST)
+        if form.is_valid():
+            w = form.save()
+            w.save()
+        return render(request, 'walker_list.html', context_dict)
     return render(request, 'walker_list.html', context_dict)
 
 def walker_indiv(request, walker_id):

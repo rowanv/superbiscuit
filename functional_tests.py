@@ -12,8 +12,7 @@ class NewVisitorTest(unittest.TestCase):
 		self.browser = webdriver.Firefox()
 		self.browser.implicitly_wait(3)
 
-	def tearDown(self):
-		self.browser.quit()
+
 
 	def test_can_start_a_business_and_view_its_information_later(self):
 
@@ -37,7 +36,7 @@ class NewVisitorTest(unittest.TestCase):
 		# They navigate to a new page, where they see their business name in the header
 		self.browser.implicitly_wait(3)
 		'''
-
+	@unittest.skip
 	def test_can_view_business_information(self):
 		self.browser.get('http://localhost:8000/business/')
 
@@ -82,7 +81,8 @@ class NewVisitorTest(unittest.TestCase):
 
 		# Satisfied, they go exit the home page and go to sleep.
 
-
+	def tearDown(self):
+		self.browser.quit()
 
 class WalkerVisitorTest(unittest.TestCase):
 
@@ -90,15 +90,41 @@ class WalkerVisitorTest(unittest.TestCase):
 		self.browser = webdriver.Firefox()
 		self.browser.implicitly_wait(3)
 
-	def tearDown(self):
-		self.browser.quit()
+
+
+	def test_can_navigate_to_dog_walker_metrics(self):
+		self.browser.get('http://localhost:8000/business/')
+		self.browser.find_element_by_id('id_walkers_btn').click()
+		green_panel = self.browser.find_element_by_css_selector('.panel-green')
+		self.assertIn('Most Walks', green_panel.text)
 
 	def test_can_add_a_dog_walker_and_view_its_information_later(self):
-		self.browser.get('http://localhost:8000/business/')
+		self.browser.get('http://localhost:8000/business/walker_list/')
+		walker_input_box = self.browser.find_element_by_id('id_walker_name')
+		walker_input_box.send_keys('Sue')
+		walker_input_box.send_keys(Keys.ENTER)
 
-		self.browser.find_element_by_id('id_walkers_button').click
+		# They then see their dog walker added to the dog walker table
+		walkers_table = self.browser.find_element_by_id('id_dog_walkers_list')
+		walker_rows = walkers_table.find_elements_by_tag_name('p')
+		self.assertIn('Sue - Wiggly Walkers More Info',
+			[walker_row.text for walker_row in walker_rows])
 
-		#TODO: Test that can add a dog walker
+
+	def test_can_view_an_individual_dog_walker(self):
+
+		self.browser.get('http://localhost:8000/business/walker_list/')
+
+		# They click on the first 'more info' link
+		self.browser.find_element_by_css_selector('.more_info_link').click()
+		header_3 = self.browser.find_element_by_tag_name('h3')
+
+		#And it is a walker profile page
+		self.assertIn('Walker Profile', header_3.text)
+
+
+	def tearDown(self):
+		self.browser.quit()
 
 if __name__ == '__main__':
 	unittest.main()
