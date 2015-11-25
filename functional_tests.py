@@ -12,6 +12,28 @@ class NewVisitorTest(unittest.TestCase):
 		self.browser = webdriver.Firefox()
 		self.browser.implicitly_wait(3)
 
+	def test_can_navigate_via_nav_bar(self):
+		self.browser.get('http://localhost:8000/business/')
+
+		# Our user finds the nav bar and clicks on a bunch of buttons.
+		# They are able to succesfully navigate to various pages.
+		self.browser.find_element_by_id('walkers_nav_id').click()
+
+		self.browser.find_element_by_id('home_nav_id').click()
+
+		# Click on walker dashboard button, a dropdown appears
+		self.browser.find_element_by_id('walkers_nav_id').click()
+
+		self.browser.find_element_by_id('walker_dash_nav_id').click()
+
+		self.browser.find_element_by_id('walkers_nav_id').click()
+
+		self.browser.find_element_by_id('walker_view_nav_id').click()
+
+		#TODO: Add test for appointments and clients
+
+
+
 
 
 	def test_can_start_a_business_and_view_its_information_later(self):
